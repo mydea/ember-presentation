@@ -1,0 +1,18 @@
+.reveal section img {
+	border: none;
+}
+.reveal section h2, .reveal section h3 {
+	text-transform: none;
+}
+
+pre.inline {
+	display: inline-block;
+	width: auto;
+	font-size: 0.8em;
+	vertical-align: middle;
+	margin: 5px;
+}
+
+pre.inline > code {
+	padding: 5px 10px;
+}

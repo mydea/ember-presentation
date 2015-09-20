@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Ember.js</title>
+
+		<meta name="description" content="An introduction to Ember.js">
+		<meta name="author" content="Francesco Novy">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="revealjs/css/reveal.css">
+		<link rel="stylesheet" href="revealjs/css/theme/white.css" id="theme">
+
+		<link rel="stylesheet" href="assets/main.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="revealjs/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'revealjs/css/print/pdf.css' : 'revealjs/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="revealjs/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Ember.js</h1>
+					<img src="assets/img/emberjs-logo.png" alt="Ember.js Logo" width="300" />
+
+					<h3>A framework for creating ambitious web applications.</h3>
+
+					<p>
+						<small><a href="http://fnovy.com">Francesco Novy</a> / <a href="http://twitter.com/_fnovy">@_fnovy</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>What is Ember.js?</h2>
+					<ul>
+						<li>Ember.js is a framework for web applications</li>
+						<li>It is well suited for complex applications</li>
+						<li>It is not well suited to implement small parts inside of a greater application</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Who uses Ember.js?</h2>
+					<ul>
+						<li>Apple</li>
+						<li>Yahoo</li>
+						<li>LinkedIn</li>
+						<li><a href="http://emberjs.com/ember-users/" target="_blank">... and many more</a></li>
+					</ul>
+					<div>
+						<img src="assets/img/who_uses_ember.jpg" alt="Who uses Ember.js?" width="500">
+					</div>
+				</section>
+
+				<section>
+					<h2>Why use Ember?</h2>
+
+					<ul>
+						<li>Frequent release cycle with strict semantic versioning</li>
+						<li>Integrated CLI with build-step etc.</li>
+						<li>Convention over Configuration</li>
+						<li>Easy to collaborate with designers/other developers</li>
+						<li>Integrated data layer</li>
+
+					</ul>
+				</section>
+
+				<section>
+					<h2>Release Cycle</h2>
+					<ul>
+						<li>A minor release every 6 weeks</li>
+						<li>A major release every ~2 years</li>
+						<li>Minor releases can introduce new features and deprecate old features</li>
+						<li><strong>It is guaranteed that all features keep working until the next major release!</strong></li>
+						<li>Updating is a matter of minutes</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Ember CLI</h2>
+					<ul>
+						<li>Integrated command line interface for Ember</li>
+						<li>Enables out of the box:</li>
+						<ul>
+							<li>Development server <pre class="inline"><code>ember serve</code></pre></li>
+							<li>Build with fingerprinting, minifying etc. <pre class="inline"><code>ember build</code></pre></li>
+							<li>Testing with QUnit <pre class="inline"><code>ember test</code></pre></li>
+							<li>Generating blueprints <pre class="inline"><code>ember generate model user</code></pre></li>
+						</ul>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Ember CLI - Getting Started</h2>
+					<ul>
+						<li>Get Node & NPM</li>
+						<li>Install Bower <pre class="inline"><code>npm install bower -g</code></pre></li>
+						<li>Install Ember-CLI <pre class="inline"><code>npm install ember-cli -g</code></pre></li>
+						<li>Create a new app <pre class="inline"><code>ember new my-app</code></pre></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Use the JavaScript from tomorrow, today</h2>
+					<ul>
+						<li>ES6 is automatically transpiled with Babel.js</li>
+						<li>Ember-CLI is based on ES6 modules</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Conventions</h2>
+					<ul>
+						<li>All Ember-CLI apps are built in the same way.</li>
+						<li>This makes it very easy to collaborate or to inspect other ember apps!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Handlebars</h2>
+					<p>Easy to use - for programmers and designers!</p>
+					<p>"HTML+"</p>
+					<pre><code data-trim contenteditable>
+<div class="my-class {{additionalClass}}">
+  <h2 style="color: {{myColor}};">{{myTitle}}</h2>
+</div>
+
+<ul>
+  {{#each myArray as |item|}}
+    <li>{{item}}</li>
+  {{/each}}
+</ul>
+
+{{#if isActive}}
+  This is active!
+{{else}}
+  This is inactive...
+{{/if}}</code></pre>
+				</section>
+
+				<section>
+					<h2>Code Example</h2>
+					<pre><code data-trim contenteditable>
+// app/pods/users/controller.js
+
+import Ember from "ember";
+
+export default Ember.Controller.extend({
+  users: ["John", "Anna", "Max"]
+});</code></pre>
+
+					<pre><code data-trim contenteditable>
+// app/pods/users/template.hbs
+
+<h1>All Users</h1>
+{{#each users as |user|}}
+  <div>{{user}}</div>
+{{/each}}</code></pre>
+				</section>
+
+				<section>
+					<h2>Built on Components</h2>
+
+					<p>
+						Components should be designed to be reusable. Ember want you to use as many
+						components as possible!
+					</p>
+
+					<pre><code data-trim contenteditable>
+<h1>All Users</h1>
+{{#each users as |user|}}
+  {{my-user-component userName=user}}
+{{/each}}</code></pre>
+				</section>
+
+				<section>
+					<h2>Example Component</h2>
+					<pre><code data-trim contenteditable>
+// app/pods/components/my-user-component/component.js
+
+import Ember from "ember";
+
+export default Ember.Component.extend({
+  isAdmin: Ember.computed("attrs.userName", function() {
+      return this.getAttr("userName") === "John";
+    })
+});</code></pre>
+
+					<pre><code data-trim contenteditable>
+// app/pods/components/my-user-component/template.hbs
+
+<div class="user-component {{if isAdmin 'is-admin' 'no-admin'}}">
+  {{userName}}{{#if isAdmin}} - Admin User{{/if}}
+</div></code></pre>
+				</section>
+
+				<section>
+					<h2>Ember Data</h2>
+
+					<div>No manual <pre class="inline"><code>$.ajax()</code></pre> calls.</div>
+
+					<pre><code data-trim contenteditable>
+// app/pods/user/model.js
+
+import DS from "ember-data";
+
+export DS.Model.extend({
+  name: DS.attr("string"),
+  age: DS.attr("number")
+});</code></pre>
+
+					<pre><code data-trim contenteditable>
+// app/pods/user/controller.js
+
+var user = this.store.createRecord("user");
+user.set("name", "John");
+user.save();</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Addons</h2>
+
+					<p>Ember-CLI provides hooks, which makes it possible to have a unified API for addons.</p>
+				</section>
+
+				<section>
+					<h2>Sass instead of CSS?</h2>
+
+					<ul>
+						<li><pre class="inline"><code data-trim contenteditable>
+							ember install ember-cli-sass
+						</code></pre></li>
+						<li>Rename "app.css" into "app.scss"</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Autoprefixer?</h2>
+
+					<ul>
+						<li><pre class="inline"><code data-trim contenteditable>
+							ember install ember-cli-autoprefixer
+						</code></pre></li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>... and many more.</h2>
+
+					<ul>
+						<li>Fake API for development: ember-cli-mirage</li>
+						<li>moment.js: ember-moment</li>
+						<li>Authentification: ember-simple-auth</li>
+						<li>Deployment: ember-cli-deploy</li>
+						<li>...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Thank you for your attention!</h2>
+					<p>... there is a lot to learn about Ember, and the beginning can seem daunting.</p>
+
+					<ul>
+						<li><a href="http://emberjs.com" target="_blank">www.emberjs.com</a></li>
+						<li><a href="http://ember-cli.com" target="_blank">www.ember-cli.com</a></li>
+						<li><a href="http://emberobserver.com" target="_blank">www.emberobserver.com</a></li>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="revealjs/lib/js/head.min.js"></script>
+		<script src="revealjs/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'revealjs/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'revealjs/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'revealjs/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
